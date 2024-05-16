@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer'
+import Profile from './pages/Home/Profile'
+import About from './pages/About/About'
+
+const mockData = {
+  userName: "Test 01",
+  description: "Lorem ipsum bla bla bla",
+  title: "Hello world!"
+}
 
 function App() {
+
+  const [page, setPage] = useState('profile')
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header userName={mockData.userName} changePage={setPage} />
+      {
+        page === 'profile' 
+          ? <Profile userData={mockData} />
+            : <About />
+      }
+      <Footer />
     </div>
   );
 }
